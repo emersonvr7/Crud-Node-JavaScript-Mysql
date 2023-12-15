@@ -1,0 +1,67 @@
+<%- include('../layouts/cabezera.ejs') %> 
+
+
+        <% if (users) { %>
+      <div class="container mt-4">
+        <div class="card border-secundary">
+            <div class="card-header">Editar Resgistro</div>
+            <div class="card-body">
+                <form action="/actualizar" method="post">
+
+
+
+                    <div class="mb-3">
+                        <label for="id" class="form-label">ID</label>
+                        <input type="txt"
+                      value="<%= users.id%>"class="form-control" readonly name="id" id="id" aria-describedby="helpId" placeholder="ID">
+                      </div>
+                    <div class="mb-3">
+                        <label for="nombreEmpre" class="form-label">Nombre De Empresa:</label>
+                        <input type="text" class="form-control" value="<%= users.nombreEmpre %>" id="nombreEmpre" name="nombreEmpre" tabindex="1">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="documento" class="form-label">Documento:</label>
+                        <input type="number" class="form-control"  value="<%= users.documento %>" id="documento" name="documento">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombreRepre" class="form-label">Representante Legal:</label>
+                        <input type="text" class="form-control" value="<%= users.nombreRepre %>" id="nombreRepre" name="nombreRepre" tabindex="1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Correo Electronico:</label>
+                        <input type="email" class="form-control" value="<%= users.correo %>" id="correo" name="correo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="direccion" class="form-label">Direccion:</label>
+                        <input type="text" class="form-control" id="direccion" value="<%= users.direccion %>" name="direccion">
+                    </div>
+                    <div class="mb-3">
+                        <label for="celular" class="form-label">Numeró De Celular:</label>
+                        <input type="number" class="form-control" value="<%= users.celular %>" id="celular" name="celular" >
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="confirma()" tabindex="5">Guardar</button>
+                    <a href="/user" class="btn btn-success">Cencelar</a>
+                </form>
+            </div>
+        </div>
+      </div>
+      <% } %>
+
+      <script>
+        function confirma(){
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'actualizado correctamente',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#',
+          }).then(() => {
+            // Redirige al usuario después del mensaje de éxito
+           window.location = '/user';
+          })
+        }
+      </script>
+
+      <%- include('../layouts/pie.ejs') %> 

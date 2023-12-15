@@ -1,0 +1,46 @@
+<%- include('layouts/cabezera.ejs') %> 
+
+        <% if (user) { %>
+      <div class="container mt-4">
+        <div class="card border-secundary">
+            <div class="card-header">Editar Resgistro</div>
+            <div class="card-body">
+                <form action="/update" method="post">
+
+                    <div class="mb-3">
+                        <label for="id" class="form-label">ID</label>
+                        <input type="txt"
+                      value="<%= user.id%>"class="form-control" readonly name="id" id="id" aria-describedby="helpId" placeholder="ID">
+                      </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" value="<%= user.nombre %>" id="nombre" name="nombre" tabindex="1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido:</label>
+                        <input type="text" class="form-control" value="<%= user.apellido %>" id="apellido" name="apellido">
+                    </div>
+                    <div class="mb-3">
+                        <label for="documento" class="form-label">Documento:</label>
+                        <input type="number" class="form-control"  value="<%= user.documento %>" id="documento" name="documento">
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Correo:</label>
+                        <input type="email" class="form-control" value="<%= user.correo %>" id="correo" name="correo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="direccion" class="form-label">Direccion:</label>
+                        <input type="text" class="form-control" id="direccion" value="<%= user.direccion %>" name="direccion">
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">telefono:</label>
+                        <input type="number" class="form-control" value="<%= user.telefono %>" id="telefono" name="telefono" >
+                    </div>
+                    <button type="submit" class="btn btn-primary" tabindex="5">Guardar</button>
+                    <a href="/" class="btn btn-success">Cencelar</a>
+                </form>
+            </div>
+        </div>
+      </div>
+      <% } %>
+      <%- include('layouts/pie.ejs') %> 

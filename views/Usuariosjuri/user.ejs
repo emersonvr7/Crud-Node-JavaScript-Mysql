@@ -1,0 +1,212 @@
+<%- include('../layouts/cabezera.ejs') %> 
+
+    
+      <div class="container">
+        <br>
+        <button type="button" class="btn btn-outline-primary mt-6" data-bs-toggle="modal"
+         data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" style="padding: 10px 20px; font-size: 18px;">
+          <i class="fa-solid fa-user-plus"></i>
+      </button>
+              <br>
+        <table id="tabla" class="table table-bordered table-striped text-center mt-4">
+            <thead style="background-color: #8a34db; color: white;">
+                <tr class="bg-primary text-white">
+                    <th scope="col" >ID</th>
+                    <th scope="col" >Nombre Empresa</th>
+                    <th scope="col" >Documento</th>
+                    <th scope="col" >Representrante Legal</th>
+                    <th scope="col" >Correo</th>
+                    <th scope="col" >Direccion</th>
+                    <th scope="col" >Celular</th>
+                    <th scope="col" >Acciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+              <% results.forEach((users) => { %>
+                  <tr>
+                      <td><%= users.id %></td>
+                      <td><%= users.nombreEmpre %></td>
+                      <td><%= users.documento %></td>
+                      <td><%= users.nombreRepre %></td>
+                      <td><%= users.correo %></td>
+                      <td><%= users.direccion %></td>
+                      <td><%= users.celular %></td>
+                      <td>
+                        <a href="/editar/<%= users.id %>" class="btn btn-outline-success"><i class="fa-solid fa-user-pen"></i></a>
+                        <a onclick="eliminar('<%= users.id %>')" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+                      </td>
+                  </tr>
+              <% }) %>
+          </tbody>
+        </table>
+    </div>
+    
+    
+
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Registro</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form action="/guardar" method="post">
+          <div class="mb-3">
+            <label for="nombreEmpre" class="col-form-label">Nombre De Empresa:</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                  <i class="fa-solid fa-building"></i>
+                </span>
+                <input type="text" class="form-control" name="nombreEmpre" id="nombreEmpre" placeholder="Ingresar:">
+            </div>
+        </div>
+        
+          <div class="mb-3">
+              <label for="documento" class="col-form-label">documento:</label>
+                <div class="input-group">
+                 <span class="input-group-text">
+                  <i class="fa-solid fa-id-card"></i>
+                  </span>
+              <input type="number" class="form-control" name="documento" id="documento" placeholder="Ingresar:">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="nombreRepre" class="col-form-label">Representante Legal:</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                  <i class="fa-solid fa-user"></i>
+                </span>
+              <input type="text" class="form-control" name="nombreRepre" id="nombreRepre" placeholder="Ingresar:">
+          </div>
+        </div>
+
+          <div class="mb-3">
+            <label for="correo" class="col-form-label">Corrreo Electronico:</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                  <i class="fa-solid fa-envelope"></i>
+                </span>
+              <input type="email" class="form-control" name="correo" id="correo" placeholder="Ingresar:">
+            </div>
+        </div>
+          <div class="mb-3">
+            <label for="direccion" class="col-form-label"> Direccion:</label>
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="fa-solid fa-location-dot"></i>
+              </span>
+              <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Ingresar:">
+            </div>
+        </div>
+          <div class="mb-3">
+            <label for="celular" class="col-form-label">Numero Celular:</label>
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+              </span>
+              <input type="text" class="form-control" name="celular" id="celular" placeholder="Ingresar:">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" onclick="validacion()" class="btn btn-success">Guardar</button>
+        </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+  function validacion() {
+    var nombr = document.getElementById("nombreEmpre").value;
+    var docume = document.getElementById("documento").value;
+    var nombre = document.getElementById("nombreRepre").value;
+    var corr = document.getElementById("correo").value;
+    var direcc = document.getElementById("direccion").value;
+    var celul = document.getElementById("celular").value;
+  
+    if (nombr === "" || docume === "" || nombre === "" || corr === "" || direcc === "" || celul === "") {
+      
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No puedes Ingresar campos vacios!',
+      })
+      setTimeout(function () {
+        Swal.close();
+      }, 2000);
+    } else {
+      // Todos los campos están llenos
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Creado correctamente',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => {
+        // Redirige al usuario después del mensaje de éxito
+        window.location.href = '/user';
+      })
+    }
+  }
+  
+  
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+ 
+
+
+
+
+<script>
+
+  new DataTable('#tabla', {
+    lengthMenu: [8,10, 20, 50] ,  
+    
+});
+
+
+  function eliminar(id){
+    Swal.fire({
+      title: 'Deseas eliminar?',
+      text: "Si lo eliminas no podrás restablecerlo",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Borrar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        return Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Borrado correctamente',
+          showConfirmButton: false,
+          timer: 1500
+        }).then(() => {
+          // Redirige al usuario después del mensaje de éxito
+          window.location = '/eliminar/' + id;
+        });
+      }
+    });
+    }
+</script>
+
+
+
+  
+
+   
+
+
+<%- include('../layouts/pie.ejs') %> 

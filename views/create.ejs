@@ -1,0 +1,81 @@
+<%- include('layouts/cabezera.ejs') %> 
+
+  <div class="container mt-4">
+    <div class="card border-secundary">
+      <div class="card-header">Nuevo Resgistro</div>
+      <div class="card-body">
+
+        <form action="/save" method="post" id="registroForm">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" tabindex="1">
+          </div>
+          <div class="mb-3">
+            <label for="apellido" class="form-label">Apellido:</label>
+            <input type="text" class="form-control" id="apellido" name="apellido">
+          </div>
+          <div class="mb-3">
+            <label for="documento" class="form-label">Documento:</label>
+            <input type="number" class="form-control" id="documento" name="documento">
+          </div>
+          <div class="mb-3">
+            <label for="correo" class="form-label">Correo:</label>
+            <input type="email" class="form-control" id="correo" name="correo">
+          </div>
+          <div class="mb-3">
+            <label for="direccion" class="form-label">Direccion:</label>
+            <input type="text" class="form-control" id="direccion" name="direccion">
+          </div>
+          <div class="mb-3">
+            <label for="telefono" class="form-label">telefono:</label>
+            <input type="number" class="form-control" id="telefono" name="telefono" >
+          </div>
+          <button type="submit" class="btn btn-primary" onclick="validacion()" tabindex="5">Guardar</button>
+          <a href="/" class="btn btn-success">Cancelar</a>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    function validacion() {
+      var nombr = document.getElementById("nombre").value;
+      var docume = document.getElementById("apellido").value;
+      var nombre = document.getElementById("documento").value;
+      var corr = document.getElementById("correo").value;
+      var direcc = document.getElementById("direccion").value;
+      var celul = document.getElementById("telefono").value;
+    
+      if (nombr === "" || docume === "" || nombre === "" || corr === "" || direcc === "" || celul === "") {
+        
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No puedes Ingresar campos vacios!',
+        })
+        setTimeout(function () {
+          Swal.close();
+        }, 2000);
+      } else {
+        // Todos los campos están llenos
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Creado correctamente',
+          showConfirmButton: false,
+          timer: 1500
+        }).then(() => {
+          // Redirige al usuario después del mensaje de éxito
+          window.location.href = '/';
+        })
+      }
+    }
+    
+    
+  </script>
+  
+
+
+
+  <%- include('layouts/pie.ejs') %> 

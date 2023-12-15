@@ -1,0 +1,85 @@
+<%- include('layouts/cabezera.ejs') %> 
+    
+      <div class="container">
+        
+        <a href="/create" class="btn btn-outline-primary mt-4"><i class="fa-solid fa-user-plus"></i></a>
+        
+        <table id="tabla" class="table table-bordered table-striped text-center mt-5">
+          <thead style="background-color: #a750f8; color: white;">
+                <tr class="bg-primary text-white">
+                    <th scope="col" >ID</th>
+                    <th scope="col" >Nombre</th>
+                    <th scope="col" >Apellido</th>
+                    <th scope="col" >Documento</th>
+                    <th scope="col" >Correo</th>
+                    <th scope="col" >Direccion</th>
+                    <th scope="col" >Telefono</th>
+                    <th scope="col" >Acciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+        </table>
+    </div>
+
+  
+    
+
+
+   
+   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+   <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+     
+     <script>
+      new DataTable('#tabla', {
+        lengthMenu: [5,10, 20, 50],
+        ajax:{
+          url:"/data",
+          dataSrc:""
+        },
+        columns:[
+        {data:"id"},
+        {data:"nombre"},
+        {data:"apellido"},
+        {data:"documento"},
+        {data:"correo"},
+        {data:"direccion"},
+        {data:"telefono"},
+        {data: null,
+          "render": function(data){
+            return '<a href="/edit/'+data.id+ '"class="btn btn-info"><i class="fa-solid fa-user-pen"></i></a> <a onclick="confirmar('+ data.id+ ')" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>';
+          }
+        }
+        ]   
+    });
+
+      function confirmar(id){
+        Swal.fire({
+          title: 'Deseas eliminar?',
+          text: "Si lo eliminas no podrás restablecerlo",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, Borrar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            return Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Borrado correctamente',
+              showConfirmButton: false,
+              timer: 1500
+            }).then(() => {
+              // Redirige al usuario después del mensaje de éxito
+              window.location = '/delete/' + id;
+            });
+          }
+        });
+        }
+    </script>
+    <%- include('layouts/pie.ejs') %> 
+   

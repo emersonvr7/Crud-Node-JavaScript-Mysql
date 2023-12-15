@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crud Usuarios Naturales</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-d7I4ALz4g5tzaoqAkQkOv1h44IdlPvkyBrTnUquLVFDjsWE1Uqos2lSBp3Gt3u3gb" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.7/dist/sweetalert2.min.js"></script>
+
+
+    <style>
+      body{
+        font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 400;
+      color: #212112;
+      background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+      background-position: center;
+      background-repeat: repeat;
+      background-size: 7%;
+      background-color: #fff;
+      overflow-x: hidden;
+        transition: all 200ms linear;
+    }
+    ::selection {
+      color: #fff;
+      background-color: #8167a9;
+    }
+    ::-moz-selection {
+      color: #fff;
+      background-color: #8167a9;
+    }
+    
+    /* #Navigation
+================================================== */
+
+    .start-header {
+      opacity: 1;
+      transform: translateY(0);
+      padding: 20px 0;
+      box-shadow: 0 10px 30px 0 rgba(138, 155, 165, 0.15);
+      -webkit-transition : all 0.3s ease-out;
+      transition : all 0.3s ease-out;
+    }
+  
+  
+    .navigation-wrap{
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      -webkit-transition : all 0.3s ease-out;
+      transition : all 0.3s ease-out;
+    }
+    .navbar{
+      padding: 0;
+    }
+    .navbar-brand img{
+      height: 30px;
+      width: auto;
+      display: block;
+      filter: brightness(100%);
+      -webkit-transition : all 0.3s ease-out;
+      transition : all 0.3s ease-out;
+    }
+    .navbar-toggler {
+      float: right;
+      border: none;
+      padding-right: 0;
+    }
+    .navbar-toggler:active,
+    .navbar-toggler:focus {
+      outline: none;
+    }
+    .navbar-light .navbar-toggler-icon {
+      width: 24px;
+      height: 17px;
+      background-image: none;
+      position: relative;
+      border-bottom: 1px solid #000;
+        transition: all 300ms linear;
+    }
+    .navbar-light .navbar-toggler-icon:after, 
+    .navbar-light .navbar-toggler-icon:before{
+      width: 24px;
+      position: absolute;
+      height: 1px;
+      background-color: #000;
+      top: 0;
+      left: 0;
+      content: '';
+      z-index: 2;
+        transition: all 300ms linear;
+    }
+    .navbar-light .navbar-toggler-icon:after{
+      top: 8px;
+    }
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
+      transform: rotate(45deg);
+    }
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
+      transform: translateY(8px) rotate(-45deg);
+    }
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+      border-color: transparent;
+    }
+    
+    .nav-item:hover .nav-link{
+      color: #8167a9 !important;
+    }
+    .nav-item.active .nav-link{
+      color: #777 !important;
+    }
+    .nav-link {
+      position: relative;
+      padding: 5px 0 !important;
+      display: inline-block;
+    }
+    .nav-item:after{
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      content: '';
+      background-color: #8167a9;
+      opacity: 0;
+        transition: all 200ms linear;
+    }
+    .nav-item:hover:after{
+      bottom: 0;
+      opacity: 1;
+    }
+    .nav-item.active:hover:after{
+      opacity: 0;
+    }
+    .nav-item{
+      position: relative;
+        transition: all 200ms linear;
+    }
+
+    
+    
+    </style>
+
+
+    
+
+  </head>
+  <body>
+    <div class="navigation-wrap bg-light start-header start-style">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav class="navbar navbar-expand-md navbar-light">
+					
+						<a class="navbar-brand" href="https://front.codes/" target="_blank"><img src="https://i.pinimg.com/564x/df/96/d8/df96d84e03317bba5b9961e75382ec37.jpg" alt=""></a>	
+						
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav ml-auto py-4 py-md-0">
+								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/home" role="button" aria-haspopup="true" aria-expanded="false">Inicio</a>
+									
+								</li>
+								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link" href="/user">Usuarios Juridicos</a>
+								</li>
+								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link" href="/">Usuarios Naturales</a>
+								</li>
+							</ul>
+						</div>
+						
+					</nav>		
+				</div>
+			</div>
+		</div>
+	</div>
+<br>
+<br><br>
